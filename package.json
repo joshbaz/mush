@@ -19,5 +19,16 @@
   "bugs": {
     "url": "https://github.com/joshbaz/mush/issues"
   },
-  "homepage": "https://github.com/joshbaz/mush#readme"
+  "homepage": "https://github.com/joshbaz/mush#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "bluebird": "^3.7.1",
+    "cloudinary": "^1.16.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.5",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^2.2.1"
+  }
 }
