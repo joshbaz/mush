@@ -13,9 +13,12 @@ const personalSchema = mongoose.Schema({
     mobile: {
         type:String
     },
-    DOB: {
+    dob: {
         type: String,
        
+    },
+    profile: {
+        type: String
     },
     userId: {
         type: mongoose.SchemaTypes.ObjectId,

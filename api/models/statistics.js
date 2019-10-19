@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const statsSchema = mongoose.Schema({
-    stataID: mongoose.Schema.Types.ObjectId,
+    _id: mongoose.Schema.Types.ObjectId,
     ProductionCapacity: {
         type: String,
         required: true

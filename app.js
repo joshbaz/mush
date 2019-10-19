@@ -9,13 +9,17 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 const userRoutes = require('./api/routes/user');
+const personalRoutes = require('./api/routes/personal');
+const farmHouseRoutes = require('./api/routes/farmHouse');
+const statisticsRoutes = require('./api/routes/statistics');
 
-mongoose.connect('mongodb+srv://jkimbareeba:' + process.env.MONGO_ATLAS_PW + '@akilidb-ovu0c.mongodb.net/akili?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://jkimbareeba:' + process.env.MONGO_ATLAS_PW + '@akilidb-ovu0c.mongodb.net/farmers?retryWrites=true&w=majority',
     {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     }
 );
-
+mongoose.set('useCreateIndex', true);
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -38,7 +42,11 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
+app.use('/personal', personalRoutes);
+app.use('/farmHouse', farmHouseRoutes);
+app.use('/stats', statisticsRoutes);
+
 //error handling on the request thus a 404 error
 app.use((req, res, next) => {
     const error = new Error('not found');

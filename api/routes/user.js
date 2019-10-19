@@ -4,28 +4,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-/*
-const multer = require('multer');
 
-const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
-
-cloudinary.config({
-    cloud_name: "dk1qehn2l",
-    api_key: "171923673547221",
-    api_secret: "Tsuf_KdVEMHIfT95k0Wm-10S694"
-});
-const storage = cloudinaryStorage({
-    cloudinary: cloudinary,
-    folder: "Profiles",
-    allowedFormats: ["jpg", "png"],
-    transformation: [{ width: 500, height: 500, crop: "limit" }]
-});
-const parser = multer({ storage: storage });
-*/
 //Register Route
 router.post('/register', (req, res, next) => {
-    User.find({ email: req.body.email })
+    User.find({email: req.body.email })
         .exec()
         .then(user => {
             if (user.length >= 1) {
@@ -36,16 +18,17 @@ router.post('/register', (req, res, next) => {
             } else {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
+                        console.log(err);
                         return res.status(500).json({
                             error: err
                         });
+                        
                     } else {
 
                         const user = new User({
-                            userID: new mongoose.Types.ObjectId(),
+                            _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
-                            password: hash,
-                           // profile: req.file.url
+                            password: hash
                         });
 
                         user.save()
@@ -96,7 +79,7 @@ router.post('/login', (req, res, next) => {
                 if (result) {
                     const token = jwt.sign({
                         email: user[0].email,
-                        userID: user[0].userID
+                        _id: user[0]._id
                     }, process.env.JWT_KEY,
                         {
                             expiresIn: "24h"
@@ -106,7 +89,7 @@ router.post('/login', (req, res, next) => {
                         message: 'Auth successful',
                         token: token,
                         email: user[0].email,
-                        userID: user[0].userID
+                        _id: user[0]._id
                     });
                 }
                 //if the response above is not achieved
@@ -122,10 +105,9 @@ router.post('/login', (req, res, next) => {
         });
 });
 
-//update the patient request
 
-router.patch('/:userID', (req, res, next) => {
-    const id = req.params.userID;
+router.patch('/:_id', (req, res, next) => {
+    const id = req.params._id;
     //delcaration of update operations.
     const updateOps = {};
 
@@ -149,8 +131,8 @@ router.patch('/:userID', (req, res, next) => {
 })
 
 //The delete route
-router.delete('/:userID', (req, res, next) => {
-    User.remove({ _id: req.params.userID })
+router.delete('/:_id', (req, res, next) => {
+    User.remove({ userId: req.params._id })
         .exec()
         .then(result => {
             res.status(200).json({
@@ -163,9 +145,9 @@ router.delete('/:userID', (req, res, next) => {
         });
 });
 
-router.get('/:userID', (req, res, next) => {
-    const id = req.params.userID;
-    User.findById(id)
+router.get('/:_id', (req, res, next) => {
+    const id = req.params._id;
+    User.find({ _id: id })
         .exec()
         .then(doc => {
             console.log(doc);
