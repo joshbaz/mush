@@ -41,6 +41,7 @@ app.use((req, res, next) => {
     next();
 });
 
+//rendering an index formart
 app.get('/', (req, res) => {
     res.send({Greetings: 'how are you?'});
 })
