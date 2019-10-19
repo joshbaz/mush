@@ -41,6 +41,9 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', (req, res) => {
+    res.send({Greetings: 'how are you?'});
+})
 
 app.use('/users', userRoutes);
 app.use('/personal', personalRoutes);
