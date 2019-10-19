@@ -24,6 +24,7 @@
     "bcrypt": "^3.0.6",
     "bluebird": "^3.7.1",
     "cloudinary": "^1.16.0",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.5",

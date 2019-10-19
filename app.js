@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 //rendering an index formart
 app.get('/', (req, res) => {
-    res.send({Greetings: 'how are you?'});
+    res.sendFile(__dirname +'/index.html');
 })
 
 app.use('/users', userRoutes);
