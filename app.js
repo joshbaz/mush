@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = require('bluebird');
 
+const userRoutes = require('./api/routes/user');
 
 mongoose.connect('mongodb+srv://jkimbareeba:' + process.env.MONGO_ATLAS_PW + '@akilidb-ovu0c.mongodb.net/akili?retryWrites=true&w=majority',
     {
@@ -36,6 +37,8 @@ app.use((req, res, next) => {
     next();
 });
 
+
+app.use('/user', userRoutes);
 //error handling on the request thus a 404 error
 app.use((req, res, next) => {
     const error = new Error('not found');
