@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/joshbaz/mush#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.7.1",
     "cloudinary": "^1.16.0",
     "ejs": "^2.7.1",
